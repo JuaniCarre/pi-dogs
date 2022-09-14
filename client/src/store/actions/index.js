@@ -24,7 +24,7 @@ export function fetchDogs() {
 
 export function searchDogs(name){
     return function (dispatch){
-        axios.get('http://localhost:3001/dogs/search/?' + name)
+        axios.get('http://localhost:3001/dogs/search/name?name=' + name)
         .then((dogs) => {
             dispatch({
                 type: SEARCH_DOGS,

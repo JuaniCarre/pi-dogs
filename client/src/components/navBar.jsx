@@ -8,7 +8,5 @@ export default function navBar(){
     <br></br>
     <Link to='/addDog'>adDog</Link>
     <br></br>
-    <Link to='/'>nada</Link>
-    <br></br>
     </>
 }

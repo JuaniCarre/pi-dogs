@@ -10,26 +10,26 @@ import Landing from './components/Landing/Landing'
 function App() {
   return (
     <div className="App">
-      <NavBar/>
+
       <Switch>
 
         <Route path="/myDogs">
+        <NavBar/>
           <MyDogs/>
         </Route>
 
         <Route path="/addDog">
+        <NavBar/>
           <AddDog/>
         </Route>
 
         <Route path="/home/:id">
+        <NavBar/>
           <DogDetail/>
         </Route>
 
-        <Route path="/home/:name">
-          
-        </Route>
-
         <Route path="/home">
+        <NavBar/>
           <Dogs/>
         </Route>
 

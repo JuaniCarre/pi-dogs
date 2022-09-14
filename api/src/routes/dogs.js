@@ -32,7 +32,7 @@ catch(error){
 })
 
 
-router.get("/search/caca", async (req, res, next) => {
+router.get("/search/name", async (req, res, next) => {
 const name = req.query.name
 
 let dogsApi = await axios.get('https://api.thedogapi.com/v1/breeds');
@@ -47,7 +47,6 @@ try {
             },
             order: [["name", "ASC"]],
         });
-        console.log(dogsDb)
         let dogsDbFiltered = dogsDb.map((ele) => {
             return {
                 id: ele.id,
@@ -57,7 +56,6 @@ try {
                 weight: ele.Weight,
             };
         });
-        console.log(dogsDbFiltered)
         let findDog = dogsApi.data.filter((ele) =>
         ele.name.toLowerCase().includes(name.toLocaleLowerCase())
         );
@@ -113,7 +111,7 @@ return res.send(allDogsFiltered);
 
 router.get('/dogTemp/:dogId/:temperamentId', async(req, res, next)=>{
     let {dogId, temperamentId}=req.params
-    console.log(dogId)
+
     try{
         const dog = await Dog.findByPk(dogId)
         const search = await Dog.findOne({
@@ -174,7 +172,6 @@ router.post('/', async (req, res, next)=>{
             maxAge: maxAge,
             image: image,
         })
-        console.log(temperament)
         if (typeof temperament === "object") {
             for (let i = 0; i < temperament.length; i++) {
                 let temperamentsFind = await Temperament.findAll({where: {name:  temperament[i] } })

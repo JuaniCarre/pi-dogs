@@ -6,7 +6,7 @@ import Dog from './dog'
 import SearchBar from './searchBar'
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
-
+import Page from './pagination'
 
 
 export default function Dogs(){
@@ -15,16 +15,23 @@ export default function Dogs(){
     useEffect(() => {
         dispatch(fetchDogs())
     }, [dispatch])
-    const [cards, setCards]= useState([])
-    const [curretPage, setCurrentPage] = useState(1);
-    const cardsPerPage=10
+    const cards= 8
+    const [currentPage, setCurrentPage] = useState(1);
+    const cardsPerPage = currentPage * cards
+    const firstShown = cardsPerPage - cards
+    const lastShown = dogs.slice(firstShown, cardsPerPage)
 
+    function pagination(pageNumber){
+        setCurrentPage(pageNumber)
+    }
+    console.log(dogs)
 
     return <div>
         
         <SearchBar/>
         <Order/>
-        {dogs.map((dog) =>{
+        <Page cards={cards} dogs={dogs.length} pagination={pagination}/>
+        {lastShown.map((dog) =>{
                 return<NavLink to={`home/${dog.id}`} >
                 <Dog name={dog.name} image={dog.image} temperament={dog.temperament} weight={dog.Weight || `${dog.minWeight} - ${dog.maxWeight}`}  />
             </NavLink> 
