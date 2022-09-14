@@ -10,10 +10,10 @@ router.get('/', async (req, res, next)=>{
     let allTemps = []
     let eachDogTemps = []
     temps.data.forEach(dog => {
-        if(dog.temperament){allTemps.push(dog.temperament)}//todos los temperamentos en alltemps (str con varios temps)
+        if(dog.temperament){allTemps.push(dog.temperament)}
     });
     allTemps.forEach(el=>{
-        eachDogTemps.push(el.split(', '||','))//array de arrays de temperamentos individuales en separatedTemps
+        eachDogTemps.push(el.split(', '||','))
         })
         let separatedTemps = []
         eachDogTemps.forEach(dog=>dog.forEach(el=>separatedTemps.push(el)))
@@ -27,18 +27,7 @@ router.get('/', async (req, res, next)=>{
     }
 })
 
-router.post('/', async (req, res, next)=>{
-    const {name}=req.body
-    const newTemperament= await Temperament.create({
-        name:name,})
-    
-    res.status(201).send(newTemperament)
-    
-})
-
-router.delete('/', (req, res, next)=>{
-    res.send('soy delete /temperament')
-})
+// router.post
 
 
 module.exports = router;

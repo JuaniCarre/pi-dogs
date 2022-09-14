@@ -16,6 +16,8 @@ export default function SearchBar(){
         e.preventDefault()
         setSearch(e.target.value)
     }
+
+
     return <div>
         <form onSubmit={onSubmit}>
         <input type="text" onChange={onInputChange} value={search}/>

@@ -5,6 +5,7 @@ import DogDetail from './components/DetailDog/dogDetail';
 import NavBar from './components/navBar';
 import MyDogs from './components/myDogs';
 import AddDog from './components/addDog'
+import Landing from './components/Landing/Landing'
 
 function App() {
   return (
@@ -24,8 +25,16 @@ function App() {
           <DogDetail/>
         </Route>
 
+        <Route path="/home/:name">
+          
+        </Route>
+
         <Route path="/home">
           <Dogs/>
+        </Route>
+
+        <Route path="/">
+          <Landing/>
         </Route>
 
       </Switch>

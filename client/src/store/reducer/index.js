@@ -1,10 +1,11 @@
 import { AZ } from "../../constantes/sort";
-import { FETCH_DOGS, SEARCH_DOGS, SORT, DETAIL_DOG, CLEAR} from "../actions";
+import { FETCH_DOGS, SEARCH_DOGS, SORT, DETAIL_DOG, CLEAR, TEMPERAMENTS} from "../actions";
 
 const initialState= {
     dogs:[],
     filteredDogs:[],
-    dogDetail:{}
+    dogDetail:{},
+    temperaments:[]
 }
 
 export default function reducer(state=initialState, action) {
@@ -16,18 +17,19 @@ export default function reducer(state=initialState, action) {
                 dogs: action.payload,
                 filteredDogs: action.payload
             }
-            
+
         case DETAIL_DOG:
             return{
                 ...state,
                 dogDetail:action.payload
             }
+
         case SEARCH_DOGS:
             return {
                 ...state, 
                 filteredDogs: action.payload
             }
-        
+
         case SORT:
             let orderedDogs = [...state.dogs]
             orderedDogs = state.dogs.sort((a,b)=>{
@@ -49,6 +51,13 @@ export default function reducer(state=initialState, action) {
                 ...state,
                 dogDetail:[]
             }
+
+        case TEMPERAMENTS:
+            return{
+                ...state,
+                temperaments: action.payload
+            }
+
         default:
             return state
     }
