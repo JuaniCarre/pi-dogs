@@ -6,10 +6,15 @@ import { useDispatch } from 'react-redux';
 
 export default function SearchBar(){
     const [search, setSearch] = useState('')
+    const [error, setError] = useState('')
     let dispatch = useDispatch()
     function onSubmit(e){
         e.preventDefault();
-        dispatch(searchDogs(search))
+        if(!/^[^\s]+(\s+[^\s]+)*$/.test(search)){
+            setError('You must type something to search, starting and ending with a letter.')
+        } else {
+            dispatch(searchDogs(search))
+        }
     }
     
     function onInputChange(e){
@@ -22,6 +27,7 @@ export default function SearchBar(){
         <form onSubmit={onSubmit}>
         <input type="text" onChange={onInputChange} value={search}/>
         <input type="submit" value="Search" />
+        {error? <span>{error}</span> : null}
         </form>
     </div>
 }

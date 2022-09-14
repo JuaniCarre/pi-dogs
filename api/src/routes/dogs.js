@@ -15,7 +15,7 @@ const dbDogs = await Dog.findAll({
 try{
     if(id.length > 5) {
         var filteredDbDogs=dbDogs.filter((dog)=> dog.id === id)
-        res.send(filteredDbDogs)
+        res.send(filteredDbDogs[0])
     } else {
         var filteredApiDogs =  apiDogs.data.filter((dog)=> dog.id==id)
         if(filteredApiDogs[0].weight.metric === 'NaN'){
@@ -147,16 +147,14 @@ router.get('/', (req, res, next)=>{
                 name : dog.name,
                 description: dog.description,
                 image: dog.image.url,
-                maxWeight : dog.weight.metric.slice(-2).trim(),
-                minWeight : dog.weight.metric.slice(0,2).trim(),
-                maxHeight: dog.height.metric.slice(-2).trim(),
-                minHeight: dog.height.metric.slice(0,2).trim(),
+                weight :dog.weight.metric,
+                Height: dog.height.metric,
                 maxAge:dog.life_span,
                 temperament: dog.temperament,
                 id: dog.id,
             }
         })
-        let allDogs=[...filteredDogs, ...dbDogs]
+        let allDogs=filteredDogs.concat(dbDogs)
         res.send(allDogs)
     })}
     catch(error)
@@ -164,10 +162,10 @@ router.get('/', (req, res, next)=>{
 });
 router.post('/', async (req, res, next)=>{
     try{
-        const {name, Weight, Height, maxAge, image, temperament}=req.body
+        const {name, weight, Height, maxAge, image, temperament}=req.body
         const newDog = await Dog.create({
             name: name,
-            Weight: Weight,
+            weight: weight,
             Height: Height,
             maxAge: maxAge,
             image: image,

@@ -5,7 +5,8 @@ export const SORT = 'SORT'
 export const DETAIL_DOG = 'DETAIL_DOG'
 export const CLEAR = 'CLEAR'
 export const TEMPERAMENTS = 'TEMPERAMENTS'
-
+export const SORTBYWEIGHT = "SORTBYWEIGHT"
+export const FILTEREDBYTEMPS = "FILTEREDBYTEMPS"
 
 export function fetchDogs() {
     return function (dispatch){
@@ -37,6 +38,7 @@ export function searchDogs(name){
     }
 }
 
+
 export function getDogById(id){
     return function(dispatch){
         axios.get('http://localhost:3001/dogs/' + id)
@@ -53,14 +55,18 @@ export function getDogById(id){
 }
 
 export function getTemperaments(){
-    return function(dispatch){
-        axios.get('http://localhost:3001/temperaments/')
-        .then((temperaments)=>{
-            dispatch({
+    return async function(dispatch){
+        let res = await axios.get('http://localhost:3001/temperaments')
+            return dispatch({
                 type: TEMPERAMENTS,
-                payload: temperaments.data
-            })
-        })
+                payload: res.data
+    })
+}}
+
+export function filteredByTemps(temp){
+    return{
+        type: FILTEREDBYTEMPS,
+        payload: temp
     }
 }
 
@@ -74,5 +80,12 @@ export function sort(order) {
     return {
         type: SORT, 
         payload: order
+    }
+}
+
+export function sortByWeight(order){
+    return {
+        type: SORTBYWEIGHT,
+        payload:order
     }
 }

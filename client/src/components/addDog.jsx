@@ -103,7 +103,7 @@ export default function AddDog(){
 
     let dog ={
         name: name,
-        Weight: `${minWeight} - ${maxWeight}`,
+        weight: `${minWeight} - ${maxWeight}`,
         Height: `${minHeight} - ${maxHeight}`,
         maxAge: maxAge,
         image: image,
@@ -151,7 +151,7 @@ export default function AddDog(){
             </option>)}
         </select>
 
-        <p>{temperaments ? `${temperaments.toString().replace(/,/g, ", ")}.`: 'Add temperaments for your new dog.'}</p>
+        <p>{temperaments.length ? `${temperaments.toString().replace(/,/g, ", ")}.`: 'Add temperaments for your new dog.'}</p>
 
         <input type="submit" value="Send"/>
         <input type="button" value="Clear form" onClick={clearState}/>
